@@ -12,11 +12,18 @@ public class LightsoutService {
 
     @Autowired
     LightsoutRepository lightsoutRepository;
-    public ArrayList<Problem> getAll() {
-        return lightsoutRepository.getAll();
+
+    public ArrayList<Problem> getAllProblems() {
+        return lightsoutRepository.getAllProblems();
+    }
+
+    public Problem getSelectedProblem(int problemId) {
+        return lightsoutRepository.getSelectedProblem(problemId);
     }
 
     public String add(Problem problem) {
         return lightsoutRepository.add(problem);
     }
+
+
 }

@@ -9,12 +9,17 @@ import java.util.ArrayList;
 public class LightsoutRepository {
 
     public ArrayList<Problem> problems = new ArrayList<Problem>();
-    public ArrayList<Problem> getAll() {
+    public ArrayList<Problem> getAllProblems() {
         return problems;
     }
 
     public String add(Problem problem) {
         problems.add(problem);
         return "Successfully added problem.";
+    }
+
+    public Problem getSelectedProblem(int problemId) {
+        return problems.stream().filter(problem -> problemId == problem.getProblemId())
+                        .findAny().orElse(null);
     }
 }

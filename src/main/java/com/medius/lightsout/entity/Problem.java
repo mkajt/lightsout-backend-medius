@@ -1,7 +1,6 @@
 package com.medius.lightsout.entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Problem {
 

@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+//swagger: http://localhost:8080/openapi/swagger-ui/index.html#/
 @RestController
-@RequestMapping("/")
 public class Controller {
 
     @Autowired
     LightsoutService lightsoutService;
 
-    @GetMapping(value = "problems", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/problems", produces = MediaType.APPLICATION_JSON_VALUE)
     public ArrayList<Problem> getAll() {
         return lightsoutService.getAll();
     }
 
-    @PostMapping(value = "problems", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/problems", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String add(@RequestBody Problem problem) {
         return lightsoutService.add(problem);
     }

@@ -19,7 +19,6 @@ public class LightsoutApplication implements CommandLineRunner {
 		SpringApplication.run(LightsoutApplication.class, args);
 	}
 
-	@Override
 	public void run(String... args) throws Exception {
 		ArrayList<Integer> numbers = new ArrayList<>();
 		numbers.add(0);
@@ -35,4 +34,5 @@ public class LightsoutApplication implements CommandLineRunner {
 		Problem problem1 = new Problem(0, numbers);
 		lightsoutRepository.add(problem1);
 	}
+
 }

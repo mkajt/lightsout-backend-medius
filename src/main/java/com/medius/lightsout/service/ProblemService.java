@@ -13,14 +13,14 @@ import java.util.Optional;
 public class ProblemService {
 
     @Autowired
-    ProblemRepository lightsoutRepository;
+    ProblemRepository problemRepository;
 
     public ArrayList<Problem> getAllProblems() {
-        return (ArrayList<Problem>) lightsoutRepository.findAll();
+        return (ArrayList<Problem>) problemRepository.findAll();
     }
 
     public Problem getSelectedProblem(Integer problemId) {
-        Optional<Problem> selected = lightsoutRepository.findById(problemId);
+        Optional<Problem> selected = problemRepository.findById(problemId);
         /*
         if (selected.isPresent()) {
             return selected.get();
@@ -30,7 +30,7 @@ public class ProblemService {
     }
 
     public String addProblem(Problem problem) {
-        lightsoutRepository.save(problem);
+        problemRepository.save(problem);
         return "Successfully added problem.";
     }
 

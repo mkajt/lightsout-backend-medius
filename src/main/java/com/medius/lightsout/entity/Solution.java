@@ -1,31 +1,35 @@
 package com.medius.lightsout.entity;
 
+import jakarta.persistence.*;
+
+@Entity(name="solution")
 public class Solution {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "solutionId")
     private Integer solutionId;
-    private Integer problemId;
+
+    @ManyToOne()
+    @JoinColumn(name = "problemId", referencedColumnName = "problemId")
+    private Problem problem;
 
     public Solution() {
     }
 
-    public Solution(int solutionId, int problemId) {
-        this.solutionId = solutionId;
-        this.problemId = problemId;
-    }
-
-    public int getSolutionId() {
+    public Integer getSolutionId() {
         return solutionId;
     }
 
-    public void setSolutionId(int solutionId) {
+    public void setSolutionId(Integer solutionId) {
         this.solutionId = solutionId;
     }
 
-    public int getProblemId() {
-        return problemId;
+    public Problem getProblem() {
+        return problem;
     }
 
-    public void setProblemId(int problemId) {
-        this.problemId = problemId;
+    public void setProblem(Problem problem) {
+        this.problem = problem;
     }
 }

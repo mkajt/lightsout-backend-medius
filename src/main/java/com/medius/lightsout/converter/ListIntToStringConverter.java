@@ -2,26 +2,25 @@ package com.medius.lightsout.converter;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Converter()
-public class ArrayListToStringConverter implements AttributeConverter<ArrayList<Integer>, String> {
+public class ListIntToStringConverter implements AttributeConverter<List<Integer>, String> {
 
     @Override
-    public String convertToDatabaseColumn(ArrayList<Integer> integers) {
+    public String convertToDatabaseColumn(List<Integer> integers) {
         StringBuilder sb = new StringBuilder();
         for (Integer integer : integers) {
             sb.append(integer);
         }
-        String matrix = sb.toString();
-        return matrix;
+        return sb.toString();
     }
 
     @Override
-    public ArrayList<Integer> convertToEntityAttribute(String s) {
-        ArrayList<Integer> matrix = new ArrayList<>();
+    public List<Integer> convertToEntityAttribute(String s) {
+        List<Integer> matrix = new ArrayList<>();
         for (int i = 0; i < s.length(); i++) {
             matrix.add(Integer.parseInt(String.valueOf(s.charAt(i))));
         }

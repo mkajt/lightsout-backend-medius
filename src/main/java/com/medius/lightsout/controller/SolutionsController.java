@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/solutions")
@@ -23,12 +24,12 @@ public class SolutionsController {
     SolutionService solutionService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<Solution> getAllSolutions() {
+    public List<Solution> getAllSolutions() {
         return solutionService.getAllSolutions();
     }
 
     @GetMapping(value = "/problem/{problemId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<Solution> getSolutionsForSelectedProblem(@PathVariable("problemId") Integer problemId) {
+    public List<Solution> getSolutionsForSelectedProblem(@PathVariable("problemId") Integer problemId) {
         return solutionService.getSolutionsForSelectedProblem(problemId);
     }
 }

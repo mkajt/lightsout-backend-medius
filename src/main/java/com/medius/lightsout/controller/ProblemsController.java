@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 //swagger: http://localhost:8080/openapi/swagger-ui/index.html#/
 //za dokumentacijo API-ja: https://stackoverflow.com/questions/75323201/how-can-i-control-tag-name-on-api-in-openapi-spring-generator
@@ -20,7 +20,7 @@ public class ProblemsController {
     ProblemService problemService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<Problem> getAllProblems() {
+    public List<Problem> getAllProblems() {
         return problemService.getAllProblems();
     }
 

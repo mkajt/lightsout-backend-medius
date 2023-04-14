@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 //business logic
@@ -15,8 +16,8 @@ public class ProblemService {
     @Autowired
     ProblemRepository problemRepository;
 
-    public ArrayList<Problem> getAllProblems() {
-        return (ArrayList<Problem>) problemRepository.findAll();
+    public List<Problem> getAllProblems() {
+        return (List<Problem>) problemRepository.findAll();
     }
 
     public Problem getSelectedProblem(Integer problemId) {

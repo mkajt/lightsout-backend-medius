@@ -2,6 +2,8 @@ package com.medius.lightsout.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity(name="solution")
 public class Solution {
 
@@ -13,6 +15,10 @@ public class Solution {
     @ManyToOne()
     @JoinColumn(name = "problemId", referencedColumnName = "problemId")
     private Problem problem;
+
+
+    /*@OneToMany(targetEntity = Solution_step.class, mappedBy = "solution")
+    private List<Solution_step> solutionSteps;*/
 
     public Solution() {
     }

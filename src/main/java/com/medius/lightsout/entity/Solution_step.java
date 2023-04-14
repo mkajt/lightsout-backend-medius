@@ -1,9 +1,10 @@
 package com.medius.lightsout.entity;
 
-import com.medius.lightsout.converter.ArrayListToStringConverter;
+import com.medius.lightsout.converter.ListIntToStringConverter;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "solution_step")
 public class Solution_step {
@@ -18,15 +19,19 @@ public class Solution_step {
     private Solution solution;
 
     //@Column(nullable = false)
-    @Convert(converter = ArrayListToStringConverter.class)
+    @Convert(converter = ListIntToStringConverter.class)
     @Column(name = "solutionSteps")
-    private ArrayList<Integer> solutionSteps;
+    private List<Integer> solutionSteps;
+
+    @Column(name = "sequence")
+    private Integer sequence;
 
     public Solution_step() {
     }
 
-    public Solution_step(ArrayList<Integer> solutionSteps) {
+    public Solution_step(List<Integer> solutionSteps, Integer sequence) {
         this.solutionSteps = solutionSteps;
+        this.sequence = sequence;
     }
 
     public Integer getSolutionStepId() {
@@ -45,11 +50,20 @@ public class Solution_step {
         this.solution = solution;
     }
 
-    public ArrayList<Integer> getSolutionSteps() {
+    public List<Integer> getSolutionSteps() {
         return solutionSteps;
     }
 
-    public void setSolutionSteps(ArrayList<Integer> solutionSteps) {
+    public void setSolutionSteps(List<Integer> solutionSteps) {
         this.solutionSteps = solutionSteps;
     }
+
+    public Integer getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
+    }
+
 }

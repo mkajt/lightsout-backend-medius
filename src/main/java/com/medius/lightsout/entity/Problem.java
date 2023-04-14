@@ -1,9 +1,10 @@
 package com.medius.lightsout.entity;
 
-import com.medius.lightsout.converter.ArrayListToStringConverter;
+import com.medius.lightsout.converter.ListIntToStringConverter;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "problem")
 public class Problem {
@@ -13,9 +14,10 @@ public class Problem {
     @Column(name = "problemId")
     private Integer problemId;
 
-    @Convert(converter = ArrayListToStringConverter.class)
+    //@Convert(converter = ArrayListIntToStringConverter.class)
+
     @Column(name = "matrix", nullable = false)
-    private ArrayList<Integer> matrix;
+    private List<Integer> matrix;
 
     @Column(name = "matrixSize", nullable = false)
     private Integer matrixSize;
@@ -24,7 +26,7 @@ public class Problem {
     @JoinColumn(name = "solutionId_fk", referencedColumnName = "problemId")
     private ArrayList<Solution> solution;*/
 
-    public Problem(ArrayList<Integer> matrix, Integer matrixSize) {
+    public Problem(List<Integer> matrix, Integer matrixSize) {
         this.matrix = matrix;
         this.matrixSize = matrixSize;
     }
@@ -40,11 +42,11 @@ public class Problem {
         this.problemId = problemId;
     }
 
-    public ArrayList<Integer> getMatrix() {
+    public List<Integer> getMatrix() {
         return matrix;
     }
 
-    public void setMatrix(ArrayList<Integer> matrix) {
+    public void setMatrix(List<Integer> matrix) {
         this.matrix = matrix;
     }
 

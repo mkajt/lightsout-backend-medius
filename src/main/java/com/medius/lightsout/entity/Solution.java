@@ -2,8 +2,8 @@ package com.medius.lightsout.entity;
 
 public class Solution {
 
-    private int solutionId;
-    private int problemId;
+    private Integer solutionId;
+    private Integer problemId;
 
     public Solution() {
     }

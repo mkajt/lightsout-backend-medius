@@ -3,8 +3,8 @@ package com.medius.lightsout.entity;
 import java.util.ArrayList;
 
 public class Solution_step {
-    private int solutionStepId;
-    private int solutionId;
+    private Integer solutionStepId;
+    private Integer solutionId;
     private ArrayList<Integer> solutionSteps;
 
     public Solution_step() {

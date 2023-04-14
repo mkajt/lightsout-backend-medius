@@ -1,25 +1,34 @@
 package com.medius.lightsout.entity;
 
+import com.medius.lightsout.converter.ArrayListToStringConverter;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 
+@Entity(name = "problem")
 public class Problem {
 
-    private int problemId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer problemId;
+
+    @Convert(converter = ArrayListToStringConverter.class)
+    @Column(nullable = false)
     private ArrayList<Integer> matrix;
+
+    public Problem(ArrayList<Integer> matrix) {
+        this.matrix = matrix;
+    }
 
     public Problem() {
     }
 
-    public Problem(int problemId, ArrayList<Integer> matrix) {
-        this.problemId = problemId;
-        this.matrix = matrix;
-    }
 
-    public int getProblemId() {
+    public Integer getProblemId() {
         return problemId;
     }
 
-    public void setProblemId(int problemId) {
+    public void setProblemId(Integer problemId) {
         this.problemId = problemId;
     }
 

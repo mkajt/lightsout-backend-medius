@@ -1,0 +1,38 @@
+package com.medius.lightsout.service;
+
+import com.medius.lightsout.entity.Problem;
+import com.medius.lightsout.repository.ProblemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Optional;
+
+//business logic
+@Service
+public class ProblemService {
+
+    @Autowired
+    ProblemRepository lightsoutRepository;
+
+    public ArrayList<Problem> getAllProblems() {
+        return (ArrayList<Problem>) lightsoutRepository.findAll();
+    }
+
+    public Problem getSelectedProblem(Integer problemId) {
+        Optional<Problem> selected = lightsoutRepository.findById(problemId);
+        /*
+        if (selected.isPresent()) {
+            return selected.get();
+        }
+        */
+        return selected.orElse(null);
+    }
+
+    public String addProblem(Problem problem) {
+        lightsoutRepository.save(problem);
+        return "Successfully added problem.";
+    }
+
+
+}

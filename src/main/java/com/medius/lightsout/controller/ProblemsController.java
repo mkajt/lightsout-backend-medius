@@ -1,7 +1,7 @@
 package com.medius.lightsout.controller;
 
 import com.medius.lightsout.entity.Problem;
-import com.medius.lightsout.service.LightsoutService;
+import com.medius.lightsout.service.ProblemService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,21 +18,23 @@ import java.util.Optional;
 public class ProblemsController {
 
     @Autowired
-    LightsoutService lightsoutService;
+    ProblemService lightsoutService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ArrayList<Problem> getAllProblems() {
+    public ArrayList<Problem> getAllProblems() {
         return lightsoutService.getAllProblems();
     }
 
     @GetMapping(value = "/{problemId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Problem getSelectedProblem(@PathVariable("problemId") int problemId) {
-        return lightsoutService.getSelectedProblem(problemId);
+    public Problem getSelectedProblem(@PathVariable("problemId") Integer problemId) {
+        Problem prob = lightsoutService.getSelectedProblem(problemId);
+        System.out.println(prob.getProblemId() + " " + prob.getMatrix());
+        return prob;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String add(@RequestBody Problem problem) {
-        return lightsoutService.add(problem);
+        return lightsoutService.addProblem(problem);
     }
 
 }

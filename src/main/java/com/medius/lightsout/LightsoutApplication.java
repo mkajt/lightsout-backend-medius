@@ -1,25 +1,23 @@
 package com.medius.lightsout;
 
 import com.medius.lightsout.entity.Problem;
-import com.medius.lightsout.repository.LightsoutRepository;
+import com.medius.lightsout.repository.ProblemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.ArrayList;
 
-@SpringBootApplication
-public class LightsoutApplication implements CommandLineRunner {
 
-	@Autowired
-	LightsoutRepository lightsoutRepository;
+@SpringBootApplication
+public class LightsoutApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LightsoutApplication.class, args);
-	}
 
-	public void run(String... args) throws Exception {
+		ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(LightsoutApplication.class, args);
+		ProblemRepository lightsoutRepository = configurableApplicationContext.getBean(ProblemRepository.class);
+
 		ArrayList<Integer> numbers = new ArrayList<>();
 		numbers.add(0);
 		numbers.add(0);
@@ -30,9 +28,8 @@ public class LightsoutApplication implements CommandLineRunner {
 		numbers.add(0);
 		numbers.add(0);
 		numbers.add(1);
-
-		Problem problem1 = new Problem(0, numbers);
-		lightsoutRepository.add(problem1);
+		Problem problem1 = new Problem(numbers);
+		lightsoutRepository.save(problem1);
 	}
 
 }

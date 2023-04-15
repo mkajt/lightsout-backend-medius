@@ -1,20 +1,33 @@
 package com.medius.lightsout.solver;
 
 import com.medius.lightsout.entity.Problem;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.medius.lightsout.entity.Solution;
+import com.medius.lightsout.entity.Solution_step;
+import com.medius.lightsout.service.ProblemService;
+import com.medius.lightsout.service.SolutionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
 public class Solver {
 
-    private static Problem problem;
-    private static Integer numberOfMoves;
+    private Problem problem;
+    private Integer numberOfMoves;
 
-    public static String solver(List<Integer> matrix, Integer matrixSize) {
+    private final ProblemService problemService;
+    private final SolutionService solutionService;
+
+    public Solver(ProblemService problemService, SolutionService solutionService) {
+        this.problemService = problemService;
+        this.solutionService = solutionService;
+    }
+
+    public String solver(List<Integer> matrix, Integer matrixSize) {
+
         problem = new Problem();
         problem.setMatrix(matrix);
         problem.setMatrixSize(matrixSize);
@@ -32,13 +45,21 @@ public class Solver {
         if (solution_step != null) {
             System.out.println("Solution step: " + solution_step);
             System.out.println("Number of moves: " + numberOfMoves);
+
+            problemService.addProblem(problem);
+            Solution solution = new Solution(problem);
+            Solution_step sStep = new Solution_step(solution_step,1,solution);
+            List<Solution_step> solutionSteps = Arrays.asList(sStep);
+            solution.setSolutionSteps(solutionSteps);
+            solutionService.addSolution(solution);
+
             return "Solvable problem.";
         }
         System.out.println("Unsolvable problem.");
         return "Unsolvable problem.";
     }
 
-    private static List<Integer> solveMatrix(List<Integer> numbers) {
+    private List<Integer> solveMatrix(List<Integer> numbers) {
         ifLightsOut(problem.getMatrix());
         //List<Integer> matrix = new ArrayList<>(problem.getMatrix());
 
@@ -57,7 +78,7 @@ public class Solver {
         return null;
     }
 
-    private static List<Integer> generateCombinations(List<Integer> matrix, Integer[] fields, List<Integer> buffer, int startIndex, int length) {
+    private List<Integer> generateCombinations(List<Integer> matrix, Integer[] fields, List<Integer> buffer, int startIndex, int length) {
         List<Integer> result;
 
         // If we have generated a combination of the desired length, print it out
@@ -80,14 +101,14 @@ public class Solver {
         return null;
     }
 
-    private static void printCombination(List<Integer> buffer) {
+    private void printCombination(List<Integer> buffer) {
         for (int i = 0; i < buffer.size(); i++) {
             System.out.print(buffer.get(i) + " ");
         }
         System.out.println();
     }
 
-    private static List<Integer> calculateMatrix(List<Integer> oldMatrix, List<Integer> buffer) {
+    private List<Integer> calculateMatrix(List<Integer> oldMatrix, List<Integer> buffer) {
 
         numberOfMoves += 1;
         List<Integer> matrix = new ArrayList<>(oldMatrix);
@@ -113,7 +134,7 @@ public class Solver {
 
     }
 
-    private static List<Integer> toggleBellowFields(List<Integer> matrix, List<Integer> solution_step) {
+    private List<Integer> toggleBellowFields(List<Integer> matrix, List<Integer> solution_step) {
         for (int i = problem.getMatrixSize(); i < Math.pow(problem.getMatrixSize(),2); i++) {
             if (matrix.get(i - problem.getMatrixSize()) == 1) {
                 matrix = toggleField(matrix, i);
@@ -123,7 +144,7 @@ public class Solver {
         return matrix;
     }
 
-    private static List<Integer> toggleField(List<Integer> matrix, Integer field) {
+    private List<Integer> toggleField(List<Integer> matrix, Integer field) {
         // set clicked field
         if (matrix.get(field) == 1) {
             matrix.set(field, 0);
@@ -170,7 +191,7 @@ public class Solver {
         return matrix;
     }
 
-    private static boolean ifLightsOut(List<Integer> matrix) {
+    private boolean ifLightsOut(List<Integer> matrix) {
         return !matrix.contains(1);
     }
 

@@ -22,4 +22,10 @@ public class SolutionService {
         Optional<List<Solution>> selected = solutionRepository.findByProblemProblemId(problemId);
         return selected.orElse(null);
     }
+
+    public String addSolution(Solution solution){
+        solutionRepository.save(solution);
+        return "Successfully added solution.";
+    }
+
 }

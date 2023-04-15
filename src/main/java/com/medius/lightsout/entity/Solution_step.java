@@ -14,8 +14,8 @@ public class Solution_step {
     @Column(name = "solutionStepId")
     private Integer solutionStepId;
 
-    @ManyToOne()
-    @JoinColumn(name = "solutionId", referencedColumnName = "solutionId")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "solutionId")
     private Solution solution;
 
     //@Column(nullable = false)
@@ -29,9 +29,10 @@ public class Solution_step {
     public Solution_step() {
     }
 
-    public Solution_step(List<Integer> solutionSteps, Integer sequence) {
+    public Solution_step(List<Integer> solutionSteps, Integer sequence, Solution solution) {
         this.solutionSteps = solutionSteps;
         this.sequence = sequence;
+        this.solution = solution;
     }
 
     public Integer getSolutionStepId() {
@@ -46,7 +47,7 @@ public class Solution_step {
         return solution;
     }
 
-    public void setSolution(Solution solutionId) {
+    public void setSolution(Solution solution) {
         this.solution = solution;
     }
 

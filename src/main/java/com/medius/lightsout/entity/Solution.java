@@ -16,11 +16,19 @@ public class Solution {
     @JoinColumn(name = "problemId", referencedColumnName = "problemId")
     private Problem problem;
 
-
-    /*@OneToMany(targetEntity = Solution_step.class, mappedBy = "solution")
-    private List<Solution_step> solutionSteps;*/
+    @OneToMany(
+            targetEntity = Solution_step.class,
+            mappedBy = "solution",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Solution_step> solutionSteps;
 
     public Solution() {
+    }
+
+    public Solution(Problem problem) {
+        this.problem = problem;
     }
 
     public Integer getSolutionId() {
@@ -37,5 +45,13 @@ public class Solution {
 
     public void setProblem(Problem problem) {
         this.problem = problem;
+    }
+
+    public List<Solution_step> getSolutionSteps() {
+        return solutionSteps;
+    }
+
+    public void setSolutionSteps(List<Solution_step> solutionSteps) {
+        this.solutionSteps = solutionSteps;
     }
 }

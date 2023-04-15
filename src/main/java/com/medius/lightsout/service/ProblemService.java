@@ -22,11 +22,7 @@ public class ProblemService {
 
     public Problem getSelectedProblem(Integer problemId) {
         Optional<Problem> selected = problemRepository.findById(problemId);
-        /*
-        if (selected.isPresent()) {
-            return selected.get();
-        }
-        */
+        /*if (selected.isPresent()) {return selected.get();}*/
         return selected.orElse(null);
     }
 

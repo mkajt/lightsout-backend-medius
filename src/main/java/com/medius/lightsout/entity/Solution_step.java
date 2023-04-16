@@ -1,5 +1,6 @@
 package com.medius.lightsout.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.medius.lightsout.converter.ListIntToStringConverter;
 import jakarta.persistence.*;
 
@@ -14,11 +15,11 @@ public class Solution_step {
     @Column(name = "solutionStepId")
     private Integer solutionStepId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "solutionId")
+    @JsonBackReference
     private Solution solution;
 
-    //@Column(nullable = false)
     @Convert(converter = ListIntToStringConverter.class)
     @Column(name = "solutionSteps")
     private List<Integer> solutionSteps;

@@ -1,5 +1,6 @@
 package com.medius.lightsout.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,12 +17,8 @@ public class Solution {
     @JoinColumn(name = "problemId", referencedColumnName = "problemId")
     private Problem problem;
 
-    @OneToMany(
-            targetEntity = Solution_step.class,
-            mappedBy = "solution",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "solution", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Solution_step> solutionSteps;
 
     public Solution() {

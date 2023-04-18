@@ -21,7 +21,8 @@ public class ProblemsController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Problem> getAllProblems() {
-        return problemService.getAllProblems();
+        List<Problem> all =  problemService.getAllProblems();
+        return all;
     }
 
     @GetMapping(value = "/{problemId}", produces = MediaType.APPLICATION_JSON_VALUE)

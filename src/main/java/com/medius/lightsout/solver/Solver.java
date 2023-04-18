@@ -93,6 +93,7 @@ public class Solver {
             buffer.add(fields[i]);
             result = generateCombinations(matrix, fields, buffer, i + 1, length - 1);
             if (result != null) {
+                System.out.println(buffer);
                 return result;
             }
             buffer.remove(buffer.size() - 1);

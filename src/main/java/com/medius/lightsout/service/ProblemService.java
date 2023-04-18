@@ -26,9 +26,9 @@ public class ProblemService {
         return selected.orElse(null);
     }
 
-    public String addProblem(Problem problem) {
-        problemRepository.save(problem);
-        return "Successfully added problem.";
+    public Integer addProblem(Problem problem) {
+        Problem savedProblem = problemRepository.save(problem);
+        return savedProblem.getProblemId();
     }
 
 

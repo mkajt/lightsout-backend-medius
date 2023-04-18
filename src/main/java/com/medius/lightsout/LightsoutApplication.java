@@ -46,8 +46,15 @@ public class LightsoutApplication {
 
 		List<Integer> matrix5 = Arrays.asList(1,1,0,1,1,0,1,1,1,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,1);
 		solverService.solver(matrix5, 5);
-		/*List<Integer> list = Arrays.asList(1, 2, 3);
-		CombinationGenerator.generateCombinations(list);*/
+
+		List<Integer> matrix7 = Arrays.asList(0,0,1,1,1,1,0,0,0,1,1,0,0,1,0,0,0,1,1,1,1,0,0,1,0,1,0,1,0,0,0,0,0,1,0,1);
+		solverService.solver(matrix7, 6);
+
+		List<Integer> matrix8 = Arrays.asList(0,0,0,0,1,1,0,1,0,0,0,1,0,0,0,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,1,0,1,0,1,1,0,1,0,1,0,1,1,0,1,1,0,1,0);
+		solverService.solver(matrix8, 7);
+
+		List<Integer> matrix9 = Arrays.asList(0,1,0,1,1,1,1,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0,1,1,1,0,1,1,0,1,0,0,1,0,0,1,0,1,1,0,0,1,0,1,0,1,0,0,1,1,0,0,1,0,1,1,1,0,0,0,0);
+		solverService.solver(matrix9, 8);
 	}
 
 }

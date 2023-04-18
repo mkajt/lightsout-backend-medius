@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
+@Service
 public class Solver {
 
     private Problem problem;
@@ -59,6 +60,39 @@ public class Solver {
         return "Unsolvable problem.";
     }
 
+    public Integer solver2(Problem problem2) {
+
+        problem = new Problem();
+        problem.setMatrix(problem2.getMatrix());
+        problem.setMatrixSize(problem2.getMatrixSize());
+        numberOfMoves = 0;
+
+        long startTime = System.nanoTime();
+
+        List<Integer> fields = IntStream.rangeClosed(0, problem.getMatrixSize()-1).boxed().toList();
+        List<Integer> solution_step = solveMatrix(fields);
+
+        long endTime = System.nanoTime();
+        double differenceTime = (endTime - startTime)/ 1e6;
+        System.out.println("\nTime duration: " + differenceTime + "ms");
+
+        if (solution_step != null) {
+            System.out.println("Solution step: " + solution_step);
+            System.out.println("Number of moves: " + numberOfMoves);
+
+            Integer newProblemId = problemService.addProblem(problem);
+            Solution solution = new Solution(problem);
+            Solution_step sStep = new Solution_step(solution_step,1,solution);
+            List<Solution_step> solutionSteps = Arrays.asList(sStep);
+            solution.setSolutionSteps(solutionSteps);
+            solutionService.addSolution(solution);
+
+            return newProblemId;
+        }
+        System.out.println("Unsolvable problem.");
+        return -1;
+    }
+
     private List<Integer> solveMatrix(List<Integer> numbers) {
         ifLightsOut(problem.getMatrix());
         //List<Integer> matrix = new ArrayList<>(problem.getMatrix());
@@ -93,7 +127,6 @@ public class Solver {
             buffer.add(fields[i]);
             result = generateCombinations(matrix, fields, buffer, i + 1, length - 1);
             if (result != null) {
-                System.out.println(buffer);
                 return result;
             }
             buffer.remove(buffer.size() - 1);

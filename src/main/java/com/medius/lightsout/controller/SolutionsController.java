@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
+//swagger: http://localhost:8080/openapi/swagger-ui/index.html#/
 @RestController
 @RequestMapping(value = "/solutions")
 @Tag(name = "Solutions Controller")

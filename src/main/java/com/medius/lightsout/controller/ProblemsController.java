@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //swagger: http://localhost:8080/openapi/swagger-ui/index.html#/
-//za dokumentacijo API-ja: https://stackoverflow.com/questions/75323201/how-can-i-control-tag-name-on-api-in-openapi-spring-generator
 @RestController
 @RequestMapping(value = "/problems")
 @Tag(name = "Problems Controller")

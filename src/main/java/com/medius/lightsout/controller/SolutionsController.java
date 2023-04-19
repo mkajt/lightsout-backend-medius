@@ -1,8 +1,6 @@
 package com.medius.lightsout.controller;
 
-import com.medius.lightsout.entity.Problem;
 import com.medius.lightsout.entity.Solution;
-import com.medius.lightsout.service.ProblemService;
 import com.medius.lightsout.service.SolutionService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
